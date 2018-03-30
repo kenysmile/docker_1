@@ -1,5 +1,9 @@
+
 import sqlite3 as sql
 
+
+
+#
 def insertUser(username,password):
     con = sql.connect("database.db")
     cur = con.cursor()
@@ -7,7 +11,7 @@ def insertUser(username,password):
     con.commit()
     con.close()
 
-def retrieveUsers():
+def retrieveUsers(x):
 	con = sql.connect("database.db")
 	cur = con.cursor()
 	cur.execute("SELECT username, password FROM Log")
@@ -15,8 +19,18 @@ def retrieveUsers():
 	con.close()
 	return users
 
+#
+# def search(username, password):
+# 	con = sql.connect("database.db")
+# 	cur = con.cursor()
+# 	cur.execute("SELECT username FROM Log WHERE username=? AND password=?", (username,password))
+# 	con.commit()
+# 	con.close()
+	# rows = cur.fetchall()
+	# for row in rows:
+	# 	print(row)
 
-
-# insertUser('tuan', 'ntt')
-# retrieveUsers()
+#
+# #print(insertUser('tuan', 'ntt'))
+# print(retrieveUsers())
 
