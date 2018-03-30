@@ -10,15 +10,6 @@ import sqlite3
 app = Flask(__name__)
 
 
-     #   try:
-     #       cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (self.username, self.password))
-     #   except:
-     #       cursor.execute('CREATE TABLE users (, username TEXT, password TEXT)')
-     #       raise UserNotFoundError('The table `users` did not exist, but it was created. Run the registration again.')
-     #   finally:
-     #       connection.commit()
-     #       connection.close()
-
 # @app.route('/login', methods=['POST'])
 # def login_user():
 #     username = request.form['username']
@@ -59,20 +50,25 @@ def login():
     cur = con.cursor()
     cur.execute("SELECT username FROM Log")
     users = cur.fetchall()
+    print(users)
     for user in users:
         a.append([user])
+    #print(a)
 
     cur.execute("SELECT password FROM Log")
     pas = cur.fetchall()
 
 
 
+
+
+
     if request.method == 'POST':
-        if request.form['username'] == user:
+        if request.form['username'] == user and request.form['password'] == pas:
             return redirect(url_for('home'))
         else:
 
-            error = 'Invalid.Please try again'
+            error = 'Invalid.Please try again', user
     #     else:
     #         return redirect(url_for('home'))
     return render_template('login.html', error = error)
